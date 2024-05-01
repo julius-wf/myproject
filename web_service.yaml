@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: my-web-service
+  labels:
+    env: web
+    owner: Dima
+  spec:
+    selector:
+      project: kgb
+    ports:
+      - name: app-listen
+        protocol: TCP
+        port: 80
+        targetPort: 80
