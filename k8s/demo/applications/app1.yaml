@@ -1,0 +1,29 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name     : myapp1
+  namespace: argocd
+  finalizers:
+  - resources-finalizer.argocd.argoproj.io
+spec:
+  destination:
+    name     : in-cluster
+    namespace: app1
+  source:
+    path   : "k8s/HelmCharts"
+    repoURL: "git@github.com:julius-wf/myproject.git"
+    targetRevision: HEAD
+    helm:
+      valueFiles:
+      - values.yaml
+      parameters:
+      - name: "container.image"
+        value: dmitryzhivanov/k8sweb:latest
+
+  project: default
+  syncPolicy:
+    automated:
+      prune   : true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true         
