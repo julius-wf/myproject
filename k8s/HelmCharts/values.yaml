@@ -1,4 +1,4 @@
 container:
   image: dmitryzhivanov/k8sweb:latest
 
-replicaCount: 4
+replicaCount: 2
